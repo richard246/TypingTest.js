@@ -1,4 +1,3 @@
-
 const overlay = document.getElementById('overlay')
 
 const Display = document.getElementById('quoteDisplay')
@@ -8,7 +7,7 @@ const modal = document.querySelector('.results')
 const startScreen =document.querySelector('.beginTest')
 
 const startbutton = document.getElementById('.start')
-const num = Math.floor(Math.random() * (1642 - 1) + 1)
+var num;
 var timeInSeconds;
 var typedChar=0;
 var word=0;
@@ -46,16 +45,24 @@ Input.addEventListener('input', () => {
     openModal()
   } 
 })
+function getRandomNum(){
+  num = Math.floor(Math.random() * (1642 - 1) + 1)
+}
 
 function getRandomQuote() {
-  return fetch('https://api.quotable.io/random')
+  getRandomNum();
+  console.log(num)
+  return fetch('https://type.fit/api/quotes')
     .then(response => response.json())
-    .then(data => data.content)
+    .then(data => data[num].text)
+    
 }
+
 
 async function renderNewQuote() {
 
   const quote =   await getRandomQuote();
+  console.log(quote)
   Display.innerHTML =''
   quote.split('').forEach(character => {
     const characterSpan = document.createElement('span')
@@ -104,6 +111,7 @@ function openModal(){
   document.getElementById('close').onclick = function(){
      typedChar=0
      word=0
+     incorrect=0
     if (document.getElementById('results') == null) return
     modal.classList.remove('active')
     overlay.classList.remove('active')
@@ -130,4 +138,3 @@ renderNewQuote()
 
 
 startScreen.classList.add('active')
-

@@ -129,7 +129,7 @@ font-weight: bold;
     pointer-events: all;
 }
 .correct {
-    color: green;
+    color: rgb(3, 208, 208);
   }
   
   .incorrect {

@@ -36,7 +36,7 @@ Input.addEventListener('input', () => {
       correct = false
       typedChar+=1
       incorrect+=1;
-      console.log(incorrect+"number of incorrect")
+      console.log("number of incorrect: "+incorrect)
     }
   })
 
